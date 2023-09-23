@@ -1,0 +1,11 @@
+{
+  "name": "urlshortener-resolver",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.mjs",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.418.0"
+  }
+}

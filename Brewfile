@@ -1,0 +1,1 @@
+brew "aws-sam-cli"

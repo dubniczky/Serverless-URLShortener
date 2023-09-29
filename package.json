@@ -2,13 +2,11 @@
   "name": "urlshortener",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
+  "type": "module",
+  "author": "Richard Dubniczky",
   "license": "ISC",
   "dependencies": {
-    "@aws-sdk/client-dynamodb": "^3.418.0"
+    "@aws-sdk/client-dynamodb": "^3.418.0",
+    "@aws-sdk/lib-dynamodb": "^3.421.0"
   }
 }

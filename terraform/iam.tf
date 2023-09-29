@@ -1,5 +1,6 @@
 #
 # Role: UrlshortenerCreatorRole
+# https://us-east-1.console.aws.amazon.com/iamv2/home#/roles/details/UrlshortenerCreatorRole
 #
 
 resource "aws_iam_role" "creator" {
@@ -81,7 +82,8 @@ EOF
 }
 
 #
-# Role: UrlshortenerCreatorRole
+# Role: UrlshortenerResolverRole
+# https://us-east-1.console.aws.amazon.com/iamv2/home#/roles/details/UrlshortenerResolverRole
 #
 
 resource "aws_iam_role" "resolver" {
@@ -161,7 +163,8 @@ EOF
 }
 
 #
-# Role: UrlshortenerStaticAssets
+# Role: UrlshortenerStaticAccess
+# https://us-east-1.console.aws.amazon.com/iamv2/home#/roles/details/UrlshortenerStaticAccess
 #
 
 resource "aws_iam_role" "static" {

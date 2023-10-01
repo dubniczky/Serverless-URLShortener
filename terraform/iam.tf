@@ -44,8 +44,8 @@ resource "aws_iam_role_policy" "creator_dynamodb" {
                 "dynamodb:PutItem"
             ],
             "Resource": [
-                "arn:aws:dynamodb:us-west-2:044477719481:table/${var.dynamodb_links_table_name}",
-                "arn:aws:dynamodb:us-west-2:044477719481:table/${var.dynamodb_links_table_name}/*"
+                "arn:aws:dynamodb:${var.region}:044477719481:table/${var.dynamodb_links_table_name}",
+                "arn:aws:dynamodb:${var.region}:044477719481:table/${var.dynamodb_links_table_name}/*"
             ]
         }
     ]
@@ -64,7 +64,7 @@ resource "aws_iam_role_policy" "creator_cloudwatch" {
         {
             "Effect": "Allow",
             "Action": "logs:CreateLogGroup",
-            "Resource": "arn:aws:logs:us-west-2:044477719481:*"
+            "Resource": "arn:aws:logs:${var.region}:044477719481:*"
         },
         {
             "Effect": "Allow",
@@ -73,7 +73,7 @@ resource "aws_iam_role_policy" "creator_cloudwatch" {
                 "logs:PutLogEvents"
             ],
             "Resource": [
-                "arn:aws:logs:us-west-2:044477719481:log-group:/aws/lambda/urlshortenerCreator:*"
+                "arn:aws:logs:${var.region}:044477719481:log-group:/aws/lambda/urlshortenerCreator:*"
             ]
         }
     ]
@@ -125,8 +125,8 @@ resource "aws_iam_role_policy" "resolver_dynamodb" {
                 "dynamodb:GetItem"
             ],
             "Resource": [
-                "arn:aws:dynamodb:us-west-2:044477719481:table/${var.dynamodb_links_table_name}",
-                "arn:aws:dynamodb:us-west-2:044477719481:table/${var.dynamodb_links_table_name}/*"
+                "arn:aws:dynamodb:${var.region}:044477719481:table/${var.dynamodb_links_table_name}",
+                "arn:aws:dynamodb:${var.region}:044477719481:table/${var.dynamodb_links_table_name}/*"
             ]
         }
     ]
@@ -145,7 +145,7 @@ resource "aws_iam_role_policy" "resolver_cloudwatch" {
         {
             "Effect": "Allow",
             "Action": "logs:CreateLogGroup",
-            "Resource": "arn:aws:logs:us-west-2:044477719481:*"
+            "Resource": "arn:aws:logs:${var.region}:044477719481:*"
         },
         {
             "Effect": "Allow",
@@ -154,7 +154,7 @@ resource "aws_iam_role_policy" "resolver_cloudwatch" {
                 "logs:PutLogEvents"
             ],
             "Resource": [
-                "arn:aws:logs:us-west-2:044477719481:log-group:/aws/lambda/urlshortenerResolver:*"
+                "arn:aws:logs:${var.region}:044477719481:log-group:/aws/lambda/urlshortenerResolver:*"
             ]
         }
     ]

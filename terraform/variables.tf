@@ -27,3 +27,8 @@ variable "domain_name" {
     type    = string
     default = "unpar.link"
 }
+
+variable "certificate_arn" {
+    type    = string
+    default = "arn:aws:acm:us-east-1:044477719481:certificate/98f3cbe5-a065-4cbb-806b-29d3742bebd9"
+}

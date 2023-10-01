@@ -44,8 +44,8 @@ resource "aws_iam_role_policy" "creator_dynamodb" {
                 "dynamodb:PutItem"
             ],
             "Resource": [
-                "arn:aws:dynamodb:us-west-2:044477719481:table/urlshortener_links",
-                "arn:aws:dynamodb:us-west-2:044477719481:table/urlshortener_links/*"
+                "arn:aws:dynamodb:us-west-2:044477719481:table/${var.dynamodb_links_table_name}",
+                "arn:aws:dynamodb:us-west-2:044477719481:table/${var.dynamodb_links_table_name}/*"
             ]
         }
     ]
@@ -125,8 +125,8 @@ resource "aws_iam_role_policy" "resolver_dynamodb" {
                 "dynamodb:GetItem"
             ],
             "Resource": [
-                "arn:aws:dynamodb:us-west-2:044477719481:table/urlshortener_links",
-                "arn:aws:dynamodb:us-west-2:044477719481:table/urlshortener_links/*"
+                "arn:aws:dynamodb:us-west-2:044477719481:table/${var.dynamodb_links_table_name}",
+                "arn:aws:dynamodb:us-west-2:044477719481:table/${var.dynamodb_links_table_name}/*"
             ]
         }
     ]
@@ -205,7 +205,7 @@ resource "aws_iam_role_policy" "static_s3" {
                 "s3:GetObject"
             ],
             "Resource": [
-                "arn:aws:s3:::urlshortener-static/*"
+                "arn:aws:s3:::${var.s3_static_bucket_name}/*"
             ]
         }
     ]

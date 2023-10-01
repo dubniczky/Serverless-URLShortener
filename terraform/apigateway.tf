@@ -63,3 +63,13 @@ resource "aws_api_gateway_method_response" "public_s_id_get_301" {
         "method.response.header.Location" = false
     }
 }
+
+resource "aws_api_gateway_stage" "public_test" {
+    rest_api_id = aws_api_gateway_rest_api.public.id
+    deployment_id = aws_api_gateway_deployment.public_test.id
+    stage_name = "test"
+}
+
+resource "aws_api_gateway_deployment" "public_test" {
+    rest_api_id = aws_api_gateway_rest_api.public.id
+}

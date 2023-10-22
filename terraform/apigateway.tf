@@ -20,7 +20,7 @@ resource "aws_api_gateway_deployment" "public_test" {
 
 resource "aws_api_gateway_resource" "public_index" {
     rest_api_id = aws_api_gateway_rest_api.public.id
-    parent_id = aws_api_gateway_rest_api.public.root_resource_id
+    parent_id = ""
 
     path_part = ""
 }
@@ -41,7 +41,7 @@ resource "aws_api_gateway_integration" "public_index_get" {
     integration_http_method = "GET"
     type = "AWS"
     credentials = aws_iam_role.static.arn
-    uri = "arn:aws:apigateway:${var.region}:s3:path/${aws_s3_bucket.static_assets.bucket}/create.html"
+    uri = "arn:aws:apigateway:${var.region}:s3:path/${aws_s3_bucket.static_assets.bucket}/index.html"
     passthrough_behavior = "WHEN_NO_MATCH"
     request_parameters = {}
 }
@@ -49,6 +49,53 @@ resource "aws_api_gateway_integration" "public_index_get" {
 resource "aws_api_gateway_method_response" "public_index_get_200" {
     rest_api_id = aws_api_gateway_rest_api.public.id
     resource_id = aws_api_gateway_resource.public_index.id
+
+    status_code = 200
+    http_method = "GET"
+    response_models = {
+        "application/json" = "Empty"
+    }
+    response_parameters = {
+        "method.response.header.Content-Length" = false
+        "method.response.header.Content-Type" = false
+        "method.response.header.Timestamp" = false
+    }
+}
+
+
+# /404.html
+
+resource "aws_api_gateway_resource" "public_404" {
+    rest_api_id = aws_api_gateway_rest_api.public.id
+    parent_id = aws_api_gateway_rest_api.public.root_resource_id
+
+    path_part = "404.html"
+}
+
+resource "aws_api_gateway_method" "public_404_get" {
+    rest_api_id = aws_api_gateway_rest_api.public.id
+    resource_id = aws_api_gateway_resource.public_404.id
+
+    http_method = "GET"
+    authorization = "NONE"
+}
+
+resource "aws_api_gateway_integration" "public_404_get" {
+    rest_api_id = aws_api_gateway_rest_api.public.id
+    resource_id = aws_api_gateway_resource.public_404.id
+
+    http_method = aws_api_gateway_method.public_404_get.http_method
+    integration_http_method = "GET"
+    type = "AWS"
+    credentials = aws_iam_role.static.arn
+    uri = "arn:aws:apigateway:${var.region}:s3:path/${aws_s3_bucket.static_assets.bucket}/404.html"
+    passthrough_behavior = "WHEN_NO_MATCH"
+    request_parameters = {}
+}
+
+resource "aws_api_gateway_method_response" "public_404_get_200" {
+    rest_api_id = aws_api_gateway_rest_api.public.id
+    resource_id = aws_api_gateway_resource.public_404.id
 
     status_code = 200
     http_method = "GET"

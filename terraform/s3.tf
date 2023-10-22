@@ -31,3 +31,11 @@ resource "aws_s3_object" "index_html" {
     content_type = "text/html"
     etag = filemd5("./../static/index.html")
 }
+
+resource "aws_s3_object" "_404_html" {
+    bucket = aws_s3_bucket.static_assets.id
+    key = "404.html"
+    source = "./../static/404.html"
+    content_type = "text/html"
+    etag = filemd5("./../static/404.html")
+}

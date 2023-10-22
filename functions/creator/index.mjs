@@ -54,14 +54,28 @@ export const handler = async(event, context) => {
         const shortId = generateId()
         const timestamp = currentTimestamp()
 
+        let ttl = 0
+        try {
+            const expiryDays = parseInt(body['expiry'])
+            if (expiryDays > 0 && expiryDays < 365+1) {
+                ttl = calculateExpiry(expiryDays)
+            }
+            else {
+                ttl = calculateExpiry(defaultExpiryDays)
+            }
+        }
+        catch (error) {
+            ttl = calculateExpiry(defaultExpiryDays)
+        }
+
         console.log('event', event)
         const command = new PutCommand({
             TableName: targetTable,
             Item: {
-                id: generateId(),
+                id: shortId,
                 url: longUrl,
                 created_at: timestamp,
-                ttl: calculateExpiry(defaultExpiryDays),
+                ttl: ttl,
             }
         })
         

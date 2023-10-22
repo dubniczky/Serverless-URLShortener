@@ -24,10 +24,9 @@ flowchart LR
     api --invoke--> lambda[Lambda]
     api --static assets--> s3[S3]
     lambda --query/modify--> db[(DynamoDB)]
+```
 
 The only fixed cost in this setup is the DNS name, and the zone hosting. Everything else scales with the number of requests and amount of data stored.
-
-```
 
 ## Resources
 
